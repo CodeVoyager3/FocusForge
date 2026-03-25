@@ -15,6 +15,12 @@ const subtopicSchema = new mongoose.Schema({
         enum: ['locked', 'active', 'completed'],
         default: 'locked'
     },
+    // Video data (auto-populated by modulePreparer)
+    videoId: { type: String, default: '' },
+    videoTitle: { type: String, default: '' },
+    channelTitle: { type: String, default: '' },
+    transcript: { type: String, default: '' },
+    // Quiz questions
     quiz: [{
         question: String,
         options: [String],
@@ -29,6 +35,11 @@ const moduleSchema = new mongoose.Schema({
     },
     module_title: {
         type: String
+    },
+    prepStatus: {
+        type: String,
+        enum: ['pending', 'preparing', 'ready', 'failed'],
+        default: 'pending'
     },
     subtopics: [subtopicSchema]
 });

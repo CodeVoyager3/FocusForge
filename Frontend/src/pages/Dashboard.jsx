@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const API_BASE = 'http://localhost:3000';
 
@@ -84,6 +85,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [query, setQuery] = useState('');
+  const nav = useNavigate();
 
   // Fetch user courses on mount
   useEffect(() => {
@@ -320,7 +322,9 @@ export default function Dashboard() {
                     </div>
 
                     {/* Action */}
-                    <button className="w-full py-2.5 rounded-xl text-sm font-bold font-label border cursor-pointer transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+                    <button
+                      onClick={() => nav(`/course/${course._id}`)}
+                      className="w-full py-2.5 rounded-xl text-sm font-bold font-label border cursor-pointer transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
                       style={{
                         borderColor: 'var(--color-primary)',
                         color: 'var(--color-primary)',
